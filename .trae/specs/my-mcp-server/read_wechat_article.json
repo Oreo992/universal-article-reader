@@ -1,0 +1,29 @@
+{
+  "name": "read_wechat_article",
+  "description": "读取公开的微信公众号文章（mp.weixin.qq.com/s*），返回Markdown正文与结构化元数据。",
+  "inputs": {
+    "type": "object",
+    "properties": {
+      "url": { "type": "string", "description": "公开分享链接，必须以 https://mp.weixin.qq.com/s 开头" },
+      "include_images": { "type": "boolean", "default": true, "description": "是否返回图片URL列表" },
+      "force_browser": { "type": "boolean", "default": false, "description": "即使 HTTP 抓取成功也强制使用浏览器渲染（对图片抓取更友好）" }
+    },
+    "required": ["url"]
+  },
+  "outputs": {
+    "type": "object",
+    "properties": {
+      "title": { "type": "string" },
+      "author": { "type": "string" },
+      "pub_time": { "type": "string", "description": "发布时间（可能为空或ISO时间）" },
+      "content_md": { "type": "string", "description": "Markdown正文" },
+      "images": { "type": "array", "items": { "type": "string" } },
+      "links": { "type": "array", "items": { "type": "string" } },
+      "source_url": { "type": "string" },
+      "strategy": { "type": "string", "enum": ["http", "browser_fallback", "http_failed"] },
+      "logs": { "type": "object" },
+      "error": { "type": "string", "description": "错误码：invalid_url/need_auth/blocked_403/rate_limited_429/timeout/no_content" },
+      "message": { "type": "string" }
+    }
+  }
+}

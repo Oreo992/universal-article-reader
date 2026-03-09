@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-server-my-mcp-server"
+version = "0.1.0"
+description = "MCP tool to read public WeChat articles and return Markdown + metadata"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Your Team" }]
+dependencies = []
+
+# Optional extras: install browser support
+[project.optional-dependencies]
+browser = ["playwright>=1.45"]
+mcp = ["fastmcp>=2.0"]
+
+[project.scripts]
+read-wechat-cli = "mcp_server_my_mcp_server.cli:main"
+read-article-cli = "mcp_server_my_mcp_server.cli:main_universal"
+wechat-mcp-http = "mcp_server_my_mcp_server.fastmcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
